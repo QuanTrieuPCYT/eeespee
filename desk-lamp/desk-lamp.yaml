@@ -1,0 +1,176 @@
+esphome:
+  name: desk-lamp
+  friendly_name: Desk Lamp
+
+esp32:
+  variant: esp32
+  framework:
+    type: esp-idf
+    version: dev
+    sdkconfig_options:
+      CONFIG_FREERTOS_UNICORE: y
+    advanced:
+      ignore_efuse_mac_crc: true
+      ignore_efuse_custom_mac: true
+
+api:
+  encryption:
+    key: !secret encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+
+udp:
+  - port: !secret controller_port
+    addresses:
+      - !secret controller_ip
+
+globals:
+  - id: ignore_climate_action
+    type: bool
+    initial_value: 'false'
+
+binary_sensor:
+  - platform: gpio
+    id: button
+    pin:
+      inverted: true
+      mode: INPUT_PULLDOWN
+      number: GPIO33
+    on_press:
+      - lambda: 'id(ignore_climate_action) = false;'
+    on_multi_click:
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
+          - light.toggle:
+              id: desk_lamp
+              transition_length: 0.2s
+
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
+          - udp.write: "rgb"
+
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
+          - udp.write: "fan"
+
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
+          - udp.write: "wol"
+
+      - timing:
+          - ON for at least 1.5s
+        then:
+          - if:
+              condition:
+                lambda: 'return !id(ignore_climate_action);'
+              then:
+                - udp.write: "climate"
+
+  - platform: gpio
+    id: reset_button
+    pin:
+      inverted: true
+      mode: INPUT_PULLDOWN
+      number: GPIO16
+
+sensor:
+  - platform: rotary_encoder
+    id: knob
+    on_value:
+      then:
+        - if:
+            condition:
+              light.is_on: desk_lamp
+            then:
+              - if:
+                  condition:
+                    lambda: "return id(button).state;"
+                  else:
+                    - lambda: |-
+                        float cur_bright = id(desk_lamp).current_values.get_brightness();
+                        float new_bright = cur_bright + (x / 25.0);
+                        
+                        if (new_bright < 0.01) new_bright = 0.01;
+                        if (new_bright > 1.0) new_bright = 1.0;
+                        
+                        auto call = id(desk_lamp).turn_on();
+                        call.set_brightness(new_bright);
+                        call.perform();
+                  then:
+                    - lambda: |-
+                        id(ignore_climate_action) = true;
+                        auto min_temp = id(desk_lamp).get_traits().get_min_mireds();
+                        auto max_temp = id(desk_lamp).get_traits().get_max_mireds();
+                        auto cur_temp = id(desk_lamp).current_values.get_color_temperature();
+                        auto new_temp = std::max(min_temp, std::min(max_temp, cur_temp + (x*10)));
+                        auto call = id(desk_lamp).turn_on();
+                        call.set_color_temperature(new_temp);
+                        call.perform();
+        - sensor.rotary_encoder.set_value:
+            id: knob
+            value: 0
+    pin_a: GPIO27
+    pin_b: GPIO26
+    resolution: 2
+
+power_supply:
+  - id: power
+    enable_time: 0s
+    keep_on_time: 0s
+    pin: GPIO12
+
+output:
+  - platform: ledc
+    id: cold_white
+    frequency: 40000Hz
+    min_power: 0.0145
+    pin: GPIO2
+    power_supply: power
+    zero_means_zero: true
+
+  - platform: ledc
+    id: warm_white
+    frequency: 40000Hz
+    min_power: 0.0145
+    pin: GPIO4
+    power_supply: power
+    zero_means_zero: true
+
+light:
+  - platform: cwww
+    id: desk_lamp
+    name: Desk Lamp
+    cold_white: cold_white
+    cold_white_color_temperature: 5000K
+    warm_white: warm_white
+    warm_white_color_temperature: 2600K
+    gamma_correct: 0
+    default_transition_length: 0s
+    restore_mode: RESTORE_DEFAULT_ON

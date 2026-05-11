@@ -1,0 +1,68 @@
+EÉÙé0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DI± clock div:2
+load:0x3fff0018,len:4
+load:0x3fff001c,len:1080
+load:0x40078000,len:11204
+QÉå0x400805e0len:3492
+
+
+xmc flash overerase  patch included
+
+08:00:00.020 [W] yglc loop started, wait msg ... (yglc_req_handler,1285)
+08:00:00.120 [W] yglc_init_async done, ret=0 (yglc_init_async,748)
+08:00:00.330 [I] miio_ot: httpdns enabled
+08:00:00.330 [I] miio_ot: dlg enabled
+
+
+_|      _|  _|_|_|  _|_|_|    _|_|
+_|_|  _|_|    _|      _|    _|    _|
+_|  _|  _|    _|      _|    _|    _|
+_|      _|    _|      _|    _|    _|
+_|      _|  _|_|_|  _|_|_|    _|_|
+JENKINS BUILD NUMBER: N/A
+BUILD TIME: Sep  2 2021,06:17:10
+BUILT BY: N/A
+MIIO APP VER: 2.1.7_0017
+MIIO MCU VER:
+MIIO DID: <REDACTED>
+MIIO WIFI MAC: <REDACTED>
+MIIO MODEL: yeelink.light.lamp4
+ARCH TYPE: esp32,0x0000a601
+ARCH VER: fb7e59c
+FLASH INFO: manufacturer(0x20), memory type(0x40), capacity(0x16)
+08:00:00.870 [W] mible_gateway_init
+ (miio_instance_create,574)
+I (2495) wifi:wifi driver task: 3ffe6c7c, prio:23, stack:6656, core=0
+I (2495) wifi:wifi firmware version: 76686f3
+I (2495) wifi:config NVS flash: enabled
+I (2495) wifi:config nano formating: disabled
+I (2495) wifi:Init data frame dynamic rx buffer num: 32
+I (2505) wifi:Init management frame dynamic rx buffer num: 32
+I (2505) wifi:Init management short buffer num: 32
+I (2515) wifi:Init dynamic tx buffer num: 32
+I (2515) wifi:Init static rx buffer size: 1600
+I (2525) wifi:Init static rx buffer num: 10
+I (2525) wifi:Init dynamic rx buffer num: 32
+I (2565) wifi:set country: cc=sg schan=1 nchan=13 policy=1
+
+Keystore initialised
+Accessory is not Paired with any controller
+Database initialised. Accessory Device ID: <REDACTED>
+HAP Initialization succeeded. Version : 4.0-fb7e59c
+W (2585) YGLC_HAP: has token HAP_MFI_AUTH_SW
+Enabling SW Token Authentication
+Setup ID: <REDACTED>
+Getting setup info from factory NVS
+HAP Main Loop Started
+mDNS initialised
+Registering HomeKit web handlers
+Announcing _hap._tcp mDNS service
+Setup ID: <REDACTED>
+Starting SoftAP with SSID: yeelink-light-lamp4_mibt<REDACTED>
+I (2625) wifi:mode : softAP (<REDACTED>)
+I (2625) wifi:Total power save buffer number: 16
+I (2625) wifi:Init max length of beacon: 752/752
+I (2625) wifi:Init max length of beacon: 752/752
+08:00:01.070 [W] mible_gap: The system has stopped scaning (mible_gap_scan,251)
+08:00:01.080 [I] otu: Opened.
+08:00:06.850 [W] mible_gap: The system has started scaning (mible_gap_scan,240)
