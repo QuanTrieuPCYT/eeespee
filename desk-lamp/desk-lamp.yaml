@@ -171,5 +171,5 @@ light:
     warm_white: warm_white
     warm_white_color_temperature: 2600K
     gamma_correct: 0
-    default_transition_length: 0s
+    default_transition_length: 0.2s
     restore_mode: RESTORE_DEFAULT_OFF
