@@ -36,5 +36,6 @@ The pins are very nicely exposed. A hairdryer and a screwdriver should help you 
 I tried to mimic the original user experience as the original firmware as close as possible while adding my features:
 - Press the knob to toggle the lamp.
 - Hold and spin the knob while the lamp is on to adjust temperature.
+- Minimum brightness is now much lower compared to the original firmware. The amber white now glows fantastically in the dark!
 - Double clicking, Tripleclicking, Quadclicking and Holding the knob button control some home appliances via [homeSwiftPackets](https://github.com/QuanTrieuPCYT/homeSwiftPackets).
 - LED Indicator is controllable as an entity in home automation systems.
