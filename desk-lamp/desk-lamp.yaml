@@ -160,7 +160,6 @@ output:
     frequency: 40000Hz
     pin: GPIO4
     power_supply: power
-    zero_means_zero: true
 
 light:
   - platform: cwww

@@ -5,6 +5,7 @@ Most of these are devices made by manufacturers, and had ESPHome flashed as a cu
 
 # Current Devices
 - [Desk Lamp](desk-lamp/README.md) - a Mi Desk Lamp 1S
-- [Wall Switch](wall-switch/README.md) - Tuya 2CH Wall Switch
-- [Decoration Lights](decoration-lights/README.md) - Tuya 10A Relay Switch
+- [Wall Switch](wall-switch/README.md) - a Tuya 2CH Wall Switch
+- [Decoration Lights](decoration-lights/README.md) - a Tuya 10A Relay Switch
 - [LED Light](led-light/README.md) - Homemade 24V 400W WS2814 LED Strip Controller
+- [LED RGB Strip](led-rgb-strip/README.md) - an ACOME AL03 Smart LED Strip
