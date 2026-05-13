@@ -4,8 +4,8 @@ Most of these are devices made by manufacturers, and had ESPHome flashed as a cu
 **NOTE:** These files are not plug-and-play, you will need a `secrets.yaml` file containing the requested fields.
 
 # Current Devices
-- [Desk Lamp](desk-lamp/README.md) - a Mi Desk Lamp 1S
-- [Wall Switch](wall-switch/README.md) - a Tuya 2CH Wall Switch
-- [Decoration Lights](decoration-lights/README.md) - a Tuya 10A Relay Switch
-- [LED Light](led-light/README.md) - Homemade 24V 400W WS2814 LED Strip Controller
-- [LED RGB Strip](led-rgb-strip/README.md) - an ACOME AL03 Smart LED Strip
+- [Desk Lamp](desk-lamp) - a Mi Desk Lamp 1S
+- [Wall Switch](wall-switch) - a Tuya 2CH Wall Switch
+- [Decoration Lights](decoration-lights) - a Tuya 10A Relay Switch
+- [LED Light](led-light) - Homemade 24V 400W WS2814 LED Strip Controller
+- [LED RGB Strip](led-rgb-strip) - an ACOME AL03 Smart LED Strip
