@@ -30,3 +30,6 @@ The Beken chip when waking up will see if there's activity present on the TX and
 ## Features
 The LED controller is located behind my bed, so physically interacting with it is not an usual thing for me. The LED controller functions exactly like the original firmware, but now with the lightweight and benefits of ESPHome not sending my traffics to some random cloud!\
 The light can also be quickly toggled **when the button is first held in**, not after releasing the button like the original firmware so it will be faster too.
+
+## Notes
+Wi-Fi Power Saving Mode is disabled to fix flickering + improve connection stability.

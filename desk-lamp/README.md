@@ -39,3 +39,6 @@ I tried to mimic the original user experience as the original firmware as close 
 - Minimum brightness is now much lower compared to the original firmware. The amber white now glows fantastically in the dark!
 - Double clicking, Tripleclicking, Quadclicking and Holding the knob button control some home appliances via [homeSwiftPackets](https://github.com/QuanTrieuPCYT/homeSwiftPackets).
 - LED Indicator is controllable as an entity in home automation systems.
+
+## Notes
+Wi-Fi Power Saving Mode is disabled to fix flickering + improve connection stability.

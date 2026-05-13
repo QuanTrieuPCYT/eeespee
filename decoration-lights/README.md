@@ -42,3 +42,6 @@ The Beken chip when waking up will see if there's activity present on the TX and
 ## Features
 This switch is always behind my guitar, so physically interacting with it is not an usual thing for me. The switch functions exactly like the original firmware, but now with the lightweight and benefits of ESPHome not sending my traffics to some random cloud!\
 The relay now also activates **when the button is first held in**, not after releasing the button like the original firmware so it will be faster too.
+
+## Notes
+Wi-Fi Power Saving Mode is disabled to improve connection stability.
