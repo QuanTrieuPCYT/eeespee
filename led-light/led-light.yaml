@@ -5,7 +5,8 @@ esphome:
 esp32:
   variant: esp32
   framework:
-    type: esp-idf
+    type: arduino
+    version: latest
 
 api:
   encryption:
@@ -27,13 +28,13 @@ light:
     pin:
       number: GPIO2
 
-  - platform: esp32_rmt_led_strip
+  - platform: neopixelbus
     name: LED Light
     pin: GPIO27
     num_leds: 60
-    chipset: SK6812
-    is_wrgb: true
-    rgb_order: RGB
+    variant: SK6812
+    type: WRGB
+    method: ESP32_I2S_0
     gamma_correct: 0.8
     default_transition_length: 0.45s
     effects:
