@@ -35,6 +35,3 @@ I tried to mimic the original user experience as the original firmware as close 
 - Click Button 2 toggles Relay 2.
 - Double clicking, Tripleclicking, Quadclicking and Holding the buttons control some home appliances via [homeSwiftPackets](https://github.com/QuanTrieuPCYT/homeSwiftPackets).
 - LED Indicator is controllable as an entity in home automation systems.
-
-## Notes
-Wi-Fi Power Saving Mode is disabled to improve connection stability.

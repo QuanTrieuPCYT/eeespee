@@ -19,7 +19,6 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   fast_connect: true
-  power_save_mode: none
 
 output:
   - platform: gpio
