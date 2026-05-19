@@ -1,0 +1,66 @@
+esphome:
+  name: temperature-and-humidity-sensor
+  friendly_name: Temperature and Humidity Sensor
+
+bk72xx:
+  board: wb3s
+  framework:
+    version: latest
+
+api:
+  encryption:
+    key: !secret encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+
+uart:
+  tx_pin: TX1
+  rx_pin: RX1
+  baud_rate: 9600
+
+time:
+  - platform: sntp
+    id: sntptime
+    timezone: Asia/Ho_Chi_Minh
+    servers:
+      - !secret controller_ip
+
+tuya:
+  time_id: sntptime
+
+light:
+  - platform: status_led
+    name: LED Indicator
+    pin:
+      number: GPIO9
+
+sensor:
+  - platform: tuya
+    name: Room Temperature
+    sensor_datapoint: 1
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    filters:
+      multiply: 0.1
+
+  - platform: tuya
+    name: Room Humidity
+    sensor_datapoint: 2
+    unit_of_measurement: "%"
+    device_class: humidity
+
+binary_sensor:
+  - platform: gpio
+    id: button
+    pin:
+      number: GPIO6
+      mode: INPUT_PULLUP
+      inverted: true

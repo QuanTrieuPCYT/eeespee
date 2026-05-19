@@ -1,0 +1,77 @@
+esphome:
+  name: led-light
+  friendly_name: LED Light
+
+esp32:
+  variant: esp32
+  framework:
+    type: arduino
+    version: latest
+    advanced:
+      compiler_optimization: PERF
+      minimum_chip_revision: 1.0
+      sram1_as_iram: true
+
+api:
+  encryption:
+    key: !secret encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+  power_save_mode: none
+
+light:
+  - platform: status_led
+    name: LED Indicator
+    pin:
+      number: GPIO2
+      ignore_strapping_warning: true
+
+  - platform: neopixelbus
+    name: LED Light
+    pin: GPIO27
+    num_leds: 60
+    variant: SK6812
+    type: WRGB
+    method: ESP32_I2S_0
+    gamma_correct: 0.8
+    default_transition_length: 0.45s
+    effects:
+      - pulse:
+      - pulse:
+          name: "Fast Pulse"
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0%
+          max_brightness: 100%
+      - pulse:
+          name: "Slow Pulse"
+          transition_length: 500ms
+          update_interval: 2s
+      - pulse:
+          name: "Asymmetrical Pulse"
+          transition_length:
+            on_length: 1s
+            off_length: 500ms
+          update_interval: 1.5s
+      - random:
+      - random:
+          name: Fast Random
+          transition_length: 2.5s
+          update_interval: 3.5s
+      - strobe:
+      - flicker:
+      - addressable_color_wipe:
+      - addressable_fireworks:
+      - addressable_flicker:
+      - addressable_rainbow:
+      - addressable_random_twinkle:
+      - addressable_scan:
+      - addressable_twinkle:
+    restore_mode: RESTORE_DEFAULT_OFF
