@@ -40,6 +40,10 @@ globals:
     type: bool
     initial_value: 'false'
 
+  - id: last_knob_value
+    type: int
+    initial_value: '0'
+
 binary_sensor:
   - platform: gpio
     id: button
@@ -113,33 +117,28 @@ sensor:
             condition:
               light.is_on: desk_lamp
             then:
-              - if:
-                  condition:
-                    lambda: "return id(button).state;"
-                  else:
-                    - lambda: |-
-                        float cur_bright = id(desk_lamp).current_values.get_brightness();
-                        float new_bright = cur_bright + (x / 25.0);
-                        
-                        if (new_bright < 0.01) new_bright = 0.01;
-                        if (new_bright > 1.0) new_bright = 1.0;
-                        
-                        auto call = id(desk_lamp).turn_on();
-                        call.set_brightness(new_bright);
-                        call.perform();
-                  then:
-                    - lambda: |-
-                        id(ignore_climate_action) = true;
-                        auto min_temp = id(desk_lamp).get_traits().get_min_mireds();
-                        auto max_temp = id(desk_lamp).get_traits().get_max_mireds();
-                        auto cur_temp = id(desk_lamp).current_values.get_color_temperature();
-                        auto new_temp = std::max(min_temp, std::min(max_temp, cur_temp + (x*10)));
-                        auto call = id(desk_lamp).turn_on();
-                        call.set_color_temperature(new_temp);
-                        call.perform();
-        - sensor.rotary_encoder.set_value:
-            id: knob
-            value: 0
+              - lambda: |-
+                  int delta = x - id(last_knob_value);
+                  id(last_knob_value) = x;
+                  if (delta == 0) return;
+                  if (id(button).state) {
+                    id(ignore_climate_action) = true;
+                    float min_temp = id(desk_lamp).get_traits().get_min_mireds();
+                    float max_temp = id(desk_lamp).get_traits().get_max_mireds();
+                    float cur_temp = id(desk_lamp).current_values.get_color_temperature();
+                    float new_temp = std::max(min_temp, std::min(max_temp, cur_temp + (delta * 15.0f)));
+                    auto call = id(desk_lamp).turn_on();
+                    call.set_color_temperature(new_temp);
+                    call.perform();
+                  } else {
+                    float cur_bright = id(desk_lamp).current_values.get_brightness();
+                    float new_bright = cur_bright + (delta * 0.05f); 
+                    if (new_bright < 0.01) new_bright = 0.01;
+                    if (new_bright > 1.0) new_bright = 1.0;
+                    auto call = id(desk_lamp).turn_on();
+                    call.set_brightness(new_bright);
+                    call.perform();
+                  }
     pin_a: GPIO27
     pin_b: GPIO26
     resolution: 2

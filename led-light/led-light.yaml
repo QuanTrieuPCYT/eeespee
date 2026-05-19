@@ -27,6 +27,17 @@ wifi:
   fast_connect: true
   power_save_mode: none
 
+binary_sensor:
+  - platform: gpio
+    id: button
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLDOWN
+      inverted: true
+      ignore_strapping_warning: true
+    on_press:
+      - light.toggle: led_light
+
 light:
   - platform: status_led
     name: LED Indicator
@@ -35,6 +46,7 @@ light:
       ignore_strapping_warning: true
 
   - platform: neopixelbus
+    id: led_light
     name: LED Light
     pin: GPIO27
     num_leds: 60
