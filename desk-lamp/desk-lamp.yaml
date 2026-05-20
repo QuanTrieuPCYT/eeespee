@@ -6,6 +6,7 @@ esp32:
   variant: esp32
   framework:
     type: esp-idf
+    version: latest
     sdkconfig_options:
       CONFIG_FREERTOS_UNICORE: y
     advanced:
@@ -91,6 +92,20 @@ binary_sensor:
           - OFF for at least 0.4s
         then:
           - udp.write: "rgb"
+
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
+          - udp.write: "fan"
 
       - timing:
           - ON for at least 1.5s
