@@ -68,29 +68,29 @@ binary_sensor:
           - ON for at most 0.4s
           - OFF for at least 0.4s
         then:
+          - udp.write: "bulbs"
+
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
+          - udp.write: "led"
+
+      - timing:
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at most 0.4s
+          - ON for at most 0.4s
+          - OFF for at least 0.4s
+        then:
           - udp.write: "rgb"
-
-      - timing:
-          - ON for at most 0.4s
-          - OFF for at most 0.4s
-          - ON for at most 0.4s
-          - OFF for at most 0.4s
-          - ON for at most 0.4s
-          - OFF for at least 0.4s
-        then:
-          - udp.write: "fan"
-
-      - timing:
-          - ON for at most 0.4s
-          - OFF for at most 0.4s
-          - ON for at most 0.4s
-          - OFF for at most 0.4s
-          - ON for at most 0.4s
-          - OFF for at most 0.4s
-          - ON for at most 0.4s
-          - OFF for at least 0.4s
-        then:
-          - udp.write: "wol"
 
       - timing:
           - ON for at least 1.5s
