@@ -11,7 +11,7 @@ Powered by an ESP32 development board that I got from Shopee for less than 3.5$.
 |------|-----------------------------|
 | 0    | Button (pulldown, inverted) |
 | 2    | LED Indicator               |
-| 27   | WS2814 Data                 |
+| 26   | WS2814 Data                 |
 
 ## Flashing
 The ESP32 board included a CH340 chip, so flashing it of course is VERY EASY. Use a data-capable USB-C cable, hold down the `BOOT` button and plugging in the cable to put it into Download Mode. After that you can flash the ESP32 with any binaries.

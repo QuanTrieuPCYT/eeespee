@@ -48,7 +48,7 @@ light:
   - platform: neopixelbus
     id: led_light
     name: LED Light
-    pin: GPIO27
+    pin: GPIO26
     num_leds: 60
     variant: SK6812
     type: WRGB
