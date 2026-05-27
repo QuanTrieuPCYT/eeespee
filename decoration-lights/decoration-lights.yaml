@@ -22,7 +22,7 @@ wifi:
 
 output:
   - platform: gpio
-    pin: P24
+    pin: GPIO24
     id: relay
 
 light:
