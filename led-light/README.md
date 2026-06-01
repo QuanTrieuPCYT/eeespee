@@ -5,7 +5,8 @@ Powered by an ESP32 on a breadboard with some dupont jumper wires, taped togethe
 ![led_light_controller](assets/led_light_controller.png)
 
 ## Hardware
-Powered by an ESP32 development board that I got from Shopee for less than 3.5$. GPIO27 is used for LED data out and have its signals amplified via a logic level shifter (SN74AHCT125N) that bumps from 3.3V to 5V. GPIO2 is built into the ESP board as a controllable blue LED so I just used it for status LED. `BOOT` button (wired to GPIO0 and pull down to `GND` when pressed) is also repurposed for toggling the light as well, as long as I don't hold it on startup.
+Powered by an ESP32 development board that I got from Shopee for less than 3.5$. GPIO27 is used for LED data out and have its signals amplified via a logic level shifter (SN74AHCT125N) that bumps from 3.3V to 5V. GPIO2 is built into the ESP board as a controllable blue LED so I just used it for status LED. `BOOT` button (wired to GPIO0 and pull down to `GND` when pressed) is also repurposed for toggling the light as well, as long as I don't hold it on startup.\
+Chip is a generic ESP32, revision 1.0 and features quad-mode PSRAM that can clock upto 120MHz. PSRAM is currently being used for Wi-Fi operations.
 
 | GPIO | Function                    |
 |------|-----------------------------|
@@ -20,4 +21,4 @@ The ESP32 board included a CH340 chip, so flashing it of course is VERY EASY. Us
 To drive my 5m 60-pixel 420-LED WS2814 strip with ease (this thing consumes like 100W at max so my PSU will handle it just fine).
 
 ## Notes
-Wi-Fi Power Saving Mode is disabled to fix flickering + improve connection stability.
+Wi-Fi Power Saving Mode is disabled when the light is on to fix flickering.

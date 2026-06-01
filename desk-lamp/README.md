@@ -3,7 +3,9 @@ A [Mi Desk Lamp 1S](https://www.mi.com/global/product/mi-led-desk-lamp-1s) flash
 It has the codename `Mango1S` with the device identifier `yeelink.light.lamp4`. Original firmware seems to use the good ol' `miio` protocol, lamp can also be controlled with the new `miot` protocol. Original firmware boot log can be found [here](assets/original_boot.log) (bootlogs of a factory resetted device).
 
 ## Hardware
-This lamp is powered by an ESP32, albeit a single core variant.
+This lamp is powered by an ESP32, albeit a single core variant.\
+`ignore_efuse_mac_crc: true` and `ignore_efuse_custom_mac: true` is required to boot ESPHome, as Yeelight seems to have tampered with the eFuses inside the chip during production.\
+Chip markings say ESP-WROOM-32D, and because this is a generic WROOM variant, **PSRAM is NOT available**. Don't try to use it or you will brick your device, requiring serial flash to unbrick. I learnt it the hard way 💔.
 
 | GPIO | Function                          |
 |------|-----------------------------------|
@@ -41,4 +43,4 @@ I tried to mimic the original user experience as the original firmware as close 
 - LED Indicator is controllable as an entity in home automation systems.
 
 ## Notes
-Wi-Fi Power Saving Mode is disabled to fix flickering + improve connection stability.
+Wi-Fi Power Saving Mode is disabled when the light is on to fix flickering.
